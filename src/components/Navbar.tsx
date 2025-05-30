@@ -1,13 +1,16 @@
 
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import { Github, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
 
-interface NavbarProps {
-  onReset?: () => void;
-}
+interface NavbarProps { onReset?: () => void; }
 
 const Navbar = ({ onReset }: NavbarProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 sm:py-4">
@@ -15,7 +18,7 @@ const Navbar = ({ onReset }: NavbarProps) => {
           {/* Creative Logo */}
           <div 
             className="flex items-center space-x-2 sm:space-x-3 cursor-pointer hover:scale-105 transition-transform duration-200"
-            onClick={onReset}
+            onClick={() => { onReset && onReset(); }}
           >
             <div className="relative">
               <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
@@ -33,37 +36,85 @@ const Navbar = ({ onReset }: NavbarProps) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:flex items-center space-x-2 hover:bg-gray-50 text-xs sm:text-sm"
-              onClick={() => window.open('https://github.com', '_blank')}
-            >
-              <Github className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden lg:inline">View Source</span>
-              <span className="lg:hidden">Source</span>
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:flex items-center space-x-2 hover:bg-yellow-50 hover:border-yellow-300 text-xs sm:text-sm"
-              onClick={() => window.open('https://github.com', '_blank')}
-            >
-              <Star className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden lg:inline">Star on GitHub</span>
-              <span className="lg:hidden">Star</span>
-            </Button>
+          <div className="hidden md:flex items-center space-x-2 sm:space-x-3">
+            {/* Desktop Buttons */}
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                className="items-center space-x-2 hover:bg-gray-50 text-xs sm:text-sm"
+                onClick={() => window.open('https://github.com', '_blank')}
+              >
+                <Github className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden lg:inline">View Source</span>
+                <span className="lg:hidden">Source</span>
+              </Button>
 
+              <Button
+                variant="outline"
+                size="sm"
+                className="items-center space-x-2 hover:bg-yellow-50 hover:border-yellow-300 text-xs sm:text-sm"
+                onClick={() => window.open('https://github.com', '_blank')}
+              >
+                <Star className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden lg:inline">Star on GitHub</span>
+                <span className="lg:hidden">Star</span>
+              </Button>
+
+              {onReset && (
+                <Button
+                  onClick={onReset}
+                  size="sm"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-3 sm:px-4"
+                >
+                  New Analysis
+                </Button>
+              )}
+            </>
+          </div>
+
+          {/* Mobile Menu */}
+          <div className="md:hidden flex items-center">
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <div className="flex flex-col space-y-4 mt-6">
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => window.open('https://github.com', '_blank')}
+                  >
+                    View Source
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => window.open('https://github.com', '_blank')}
+                  >
+                    Star on GitHub
+                  </Button>
+                  {onReset && (
+                    <Button
+                      onClick={() => { onReset(); setIsMenuOpen(false); }}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                    >
+                      New Analysis
+                    </Button>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
             {onReset && (
               <Button
                 onClick={onReset}
                 size="sm"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-3 sm:px-4"
+                className="ml-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-3 sm:px-4"
               >
-                <span className="hidden sm:inline">New Analysis</span>
-                <span className="sm:hidden">New</span>
+                New
               </Button>
             )}
           </div>
