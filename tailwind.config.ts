@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -152,6 +151,20 @@ export default {
 					'66%': {
 						transform: 'translateY(-5px) rotate(-1deg)'
 					}
+				},
+				'pixel-fly': {
+					'0%': {
+						opacity: '1',
+						transform: 'translate(0, 0) scale(1) rotate(0deg)'
+					},
+					'50%': {
+						opacity: '0.7',
+						transform: 'translate(var(--random-x, 100px), var(--random-y, -50px)) scale(0.5) rotate(180deg)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'translate(var(--random-x, 200px), var(--random-y, -100px)) scale(0) rotate(360deg)'
+					}
 				}
 			},
 			animation: {
@@ -162,7 +175,8 @@ export default {
 				'slide-down': 'slide-down 2s ease-in-out infinite',
 				'progress': 'progress 3s ease-in-out infinite',
 				'bounce-slow': 'bounce-slow 2s infinite',
-				'float': 'float 3s ease-in-out infinite'
+				'float': 'float 3s ease-in-out infinite',
+				'pixel-fly': 'pixel-fly 1.5s ease-out forwards'
 			}
 		}
 	},
