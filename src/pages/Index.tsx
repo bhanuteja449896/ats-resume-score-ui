@@ -73,7 +73,7 @@ const Index = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8080/api/analyze-resume', {
+      const response = await fetch('https://resume-ats-score-hvp2.onrender.com/api/analyze-resume', {
         method: 'POST',
         body: formData,
       });
