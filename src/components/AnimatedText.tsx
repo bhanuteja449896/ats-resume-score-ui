@@ -11,16 +11,16 @@ const AnimatedText = () => {
   ];
 
   const [currentPhrase, setCurrentPhrase] = useState(0);
-  const [isSliding, setIsSliding] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsSliding(true);
+      setIsTransitioning(true);
       
       setTimeout(() => {
         setCurrentPhrase((prev) => (prev + 1) % phrases.length);
-        setIsSliding(false);
-      }, 500); // Half of the animation duration
+        setIsTransitioning(false);
+      }, 750);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -29,8 +29,10 @@ const AnimatedText = () => {
   return (
     <div className="text-center relative overflow-hidden h-20 flex items-center justify-center">
       <div 
-        className={`transition-transform duration-1000 ease-in-out ${
-          isSliding ? 'transform translate-y-full opacity-0' : 'transform translate-y-0 opacity-100'
+        className={`transition-all duration-700 ease-in-out ${
+          isTransitioning 
+            ? 'transform translate-y-full opacity-0' 
+            : 'transform translate-y-0 opacity-100'
         }`}
       >
         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -38,10 +40,11 @@ const AnimatedText = () => {
         </h1>
       </div>
       
-      {/* Next text sliding in from top */}
       <div 
-        className={`absolute top-0 left-0 right-0 transition-transform duration-1000 ease-in-out ${
-          isSliding ? 'transform translate-y-0 opacity-100' : 'transform -translate-y-full opacity-0'
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
+          isTransitioning 
+            ? 'transform translate-y-0 opacity-100' 
+            : 'transform -translate-y-full opacity-0'
         }`}
       >
         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

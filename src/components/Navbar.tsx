@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FileSearch, Github, Star } from 'lucide-react';
+import { Github, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface NavbarProps {
@@ -12,42 +12,25 @@ const Navbar = ({ onReset }: NavbarProps) => {
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Creative Logo */}
           <div 
-            className="flex items-center space-x-2 cursor-pointer hover:scale-105 transition-transform duration-200"
+            className="flex items-center space-x-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             onClick={onReset}
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <FileSearch className="h-6 w-6 text-white" />
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-lg">A</div>
+                </div>
+              </div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                ATS Score Checker
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 bg-clip-text text-transparent">
+                ATS Scout
               </h1>
-              <p className="text-xs text-gray-500">AI-Powered Resume Analysis</p>
+              <p className="text-xs text-gray-500 font-medium">Smart Resume Analysis</p>
             </div>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            <a 
-              href="#features" 
-              className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium"
-            >
-              Features
-            </a>
-            <a 
-              href="#how-it-works" 
-              className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium"
-            >
-              How It Works
-            </a>
-            <a 
-              href="#about" 
-              className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium"
-            >
-              About
-            </a>
           </div>
 
           {/* Action Buttons */}
