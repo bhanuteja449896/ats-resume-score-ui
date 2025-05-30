@@ -23,7 +23,7 @@ const Navbar = ({ onReset }: NavbarProps) => {
             <div className="relative">
               <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white rounded-md sm:rounded-lg flex items-center justify-center">
-                  <div className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-sm sm:text-base md:text-lg">A</div>
+                  <div className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-sm sm:text-base md:text-lg">ATS</div>
                 </div>
               </div>
             </div>
@@ -86,14 +86,14 @@ const Navbar = ({ onReset }: NavbarProps) => {
                   <Button
                     variant="outline"
                     className="w-full"
-                    onClick={() => window.open('https://github.com', '_blank')}
+                    onClick={() => window.open('https://github.com/bhanuteja449896', '_blank')}
                   >
                     View Source
                   </Button>
                   <Button
                     variant="outline"
                     className="w-full"
-                    onClick={() => window.open('https://github.com', '_blank')}
+                    onClick={() => window.open('https://github.com/bhanuteja449896/resume-ats-score', '_blank')}
                   >
                     Star on GitHub
                   </Button>
