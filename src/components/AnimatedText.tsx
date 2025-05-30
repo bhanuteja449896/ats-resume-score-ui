@@ -40,7 +40,7 @@ const AnimatedText = () => {
   }, [phrases.length, currentPhrase]);
 
   return (
-    <div className="text-center relative overflow-hidden h-20 flex items-center justify-center">
+    <div className="text-center relative overflow-hidden h-16 sm:h-20 md:h-24 flex items-center justify-center px-4">
       {/* Main Text */}
       <div 
         className={`transition-all duration-500 ease-in-out ${
@@ -49,7 +49,7 @@ const AnimatedText = () => {
             : 'opacity-100 scale-100 blur-0'
         }`}
       >
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight">
           {phrases[currentPhrase]}
         </h1>
       </div>
@@ -60,7 +60,7 @@ const AnimatedText = () => {
           {pixels.map((pixel) => (
             <div
               key={pixel.id}
-              className="absolute text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-pixel-fly"
+              className="absolute text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-pixel-fly"
               style={{
                 left: `${pixel.x}px`,
                 top: `${pixel.y}px`,
@@ -75,7 +75,7 @@ const AnimatedText = () => {
       )}
       
       {/* Gradient Bar */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-32 animate-pulse"></div>
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 sm:h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-20 sm:w-32 animate-pulse"></div>
     </div>
   );
 };

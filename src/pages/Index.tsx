@@ -128,19 +128,19 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
+      <main className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="text-center mb-8 sm:mb-12">
           <AnimatedText />
           
-          <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 max-w-xs sm:max-w-2xl mx-auto leading-relaxed px-2">
             Upload your resume and get an instant ATS compatibility score with detailed feedback
             to improve your chances of landing your dream job.
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto">
-          <Card className="p-8 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-            <div className="space-y-6">
+        <div className="max-w-xl sm:max-w-2xl mx-auto">
+          <Card className="p-4 sm:p-6 md:p-8 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+            <div className="space-y-4 sm:space-y-6">
               {/* File Upload Area */}
               <div className="relative">
                 <input
@@ -150,32 +150,32 @@ const Index = () => {
                   onChange={handleFileChange}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
-                <div className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-300 ${
+                <div className={`border-2 border-dashed rounded-lg p-4 sm:p-6 md:p-8 text-center transition-all duration-300 ${
                   file 
                     ? 'border-green-400 bg-green-50' 
                     : 'border-blue-300 hover:border-blue-400 hover:bg-blue-50'
                 }`}>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {file ? (
-                      <FileText className="h-12 w-12 text-green-600 mx-auto" />
+                      <FileText className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-green-600 mx-auto" />
                     ) : (
-                      <Upload className="h-12 w-12 text-blue-600 mx-auto" />
+                      <Upload className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-blue-600 mx-auto" />
                     )}
                     
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
                         {file ? 'File Selected' : 'Upload Your Resume'}
                       </h3>
                       {file ? (
-                        <p className="text-green-600 font-medium">{file.name}</p>
+                        <p className="text-sm sm:text-base text-green-600 font-medium break-words px-2">{file.name}</p>
                       ) : (
-                        <p className="text-gray-600">
+                        <p className="text-sm sm:text-base text-gray-600 px-2">
                           Drag and drop your resume here, or click to browse
                         </p>
                       )}
                     </div>
                     
-                    <div className="text-sm text-gray-500">
+                    <div className="text-xs sm:text-sm text-gray-500">
                       <p>Supported formats: PDF, DOCX</p>
                       <p>Maximum size: 5MB</p>
                     </div>
@@ -187,9 +187,9 @@ const Index = () => {
               <Button
                 onClick={handleUpload}
                 disabled={!file}
-                className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
+                className="w-full py-2 sm:py-3 text-base sm:text-lg font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
               >
-                <Eye className="h-5 w-5 mr-2" />
+                <Eye className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 Analyze Resume
               </Button>
             </div>
