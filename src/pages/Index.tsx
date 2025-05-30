@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Upload, CheckCircle, AlertCircle, FileText, Eye } from 'lucide-react';
+import React, { useState } from 'react';
+import { Upload, FileText, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
@@ -31,33 +31,7 @@ const Index = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
-  const [serverStatus, setServerStatus] = useState<'checking' | 'active' | 'inactive'>('checking');
   const { toast } = useToast();
-
-  // Check server status on component mount
-  useEffect(() => {
-    checkServerStatus();
-  }, []);
-
-  const checkServerStatus = async () => {
-    try {
-      setServerStatus('checking');
-      const response = await fetch('http://localhost:8080/api/health');
-      if (response.ok) {
-        setServerStatus('active');
-      } else {
-        setServerStatus('inactive');
-      }
-    } catch (error) {
-      console.error('Server status check failed:', error);
-      setServerStatus('inactive');
-      toast({
-        title: "Server Status",
-        description: "Backend server is starting up. This may take up to 45 seconds.",
-        variant: "destructive",
-      });
-    }
-  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -93,15 +67,6 @@ const Index = () => {
 
   const handleUpload = async () => {
     if (!file) return;
-
-    if (serverStatus !== 'active') {
-      toast({
-        title: "Server Unavailable",
-        description: "Please wait for the server to become active.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     setIsUploading(true);
     const formData = new FormData();
@@ -176,36 +141,6 @@ const Index = () => {
         <div className="max-w-2xl mx-auto">
           <Card className="p-8 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
             <div className="space-y-6">
-              {/* Server Status Indicator */}
-              <div className="flex items-center justify-center space-x-2 mb-6">
-                {serverStatus === 'checking' && (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                    <span className="text-sm text-gray-600">Checking server status...</span>
-                  </>
-                )}
-                {serverStatus === 'active' && (
-                  <>
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <span className="text-sm text-green-600">Server Active</span>
-                  </>
-                )}
-                {serverStatus === 'inactive' && (
-                  <>
-                    <AlertCircle className="h-4 w-4 text-red-600" />
-                    <span className="text-sm text-red-600">Server Starting (45s)</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={checkServerStatus}
-                      className="ml-2"
-                    >
-                      Retry
-                    </Button>
-                  </>
-                )}
-              </div>
-
               {/* File Upload Area */}
               <div className="relative">
                 <input
@@ -214,14 +149,11 @@ const Index = () => {
                   accept=".pdf,.docx"
                   onChange={handleFileChange}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  disabled={serverStatus !== 'active'}
                 />
                 <div className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-300 ${
                   file 
                     ? 'border-green-400 bg-green-50' 
-                    : serverStatus === 'active'
-                      ? 'border-blue-300 hover:border-blue-400 hover:bg-blue-50' 
-                      : 'border-gray-300 bg-gray-50'
+                    : 'border-blue-300 hover:border-blue-400 hover:bg-blue-50'
                 }`}>
                   <div className="space-y-4">
                     {file ? (
@@ -254,7 +186,7 @@ const Index = () => {
               {/* Upload Button */}
               <Button
                 onClick={handleUpload}
-                disabled={!file || serverStatus !== 'active'}
+                disabled={!file}
                 className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
               >
                 <Eye className="h-5 w-5 mr-2" />
